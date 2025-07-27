@@ -1,6 +1,18 @@
-# 🌟 Grok Rate Checker v1.4
+
+# 🌟 Grok Rate Checker v1.5
 
 > 🔎 即時顯示 Grok 剩餘對話次數（支援 Grok 3 與 Grok 4）
+
+---
+
+## 📢 v1.5 更新說明（2025-07-27）
+
+由於 xAI 調整了 API 設計，**SuperGrok（付費用戶）已改為以 Token 為單位計算查詢配額**，不再回傳傳統的 query 次數資訊。因此，v1.5 版本加入：
+
+* 自動偵測使用者類型（免費 vs 付費）
+* 付費用戶將看到「Low Effort / High Effort」對應的 token 顯示
+* 免費用戶仍維持舊版對話次數查詢模式
+* UI 會根據偵測結果自動切換，無須設定
 
 ---
 
@@ -11,13 +23,11 @@
 🧠 支援查詢類型：
 
 * **Grok 3**
-
   * 一般對話（Default）
   * 深度搜尋（DeepSearch）
   * 更深度搜尋（DeeperSearch）
   * 思考模式（Think）
 * **Grok 4**
-
   * 一般對話（Default）
   * 深度思考 (Heavy)
 
@@ -28,6 +38,8 @@
 ## ✨ 功能特色
 
 * ✅ 即時查看 Grok 剩餘對話次數（支援 Grok 3 + Grok 4）
+* 🪙 付費用戶支援 Token 顯示（Low Effort / High Effort 模式）
+* 🔄 免費用戶維持 query-based 顯示（與舊版相容）
 * 🎨 有風格且動畫平滑的浮動介面
 * 🧲 完全可拖曳的位置設計
 * ⚡ 每 5 秒自動更新一次
@@ -38,7 +50,19 @@
 
 ## 📸 截圖預覽
 
+### 🔐 付費用戶（SuperGrok）UI
+
+顯示 Token 機制（Low / High Effort 分開計算）：
+
 ![Grok Rate Checker screenshot](screenshot.png)
+
+---
+
+### 🆓 免費用戶 UI
+
+使用傳統對話次數查詢邏輯：
+
+![Grok Rate Checker screenshot2](screenshot2.png)
 
 ---
 
@@ -57,36 +81,6 @@
 
 * `manifest.json`：擴充功能設定與權限定義
 * `content.js`：注入頁面的腳本，負責即時抓取並顯示剩餘對話次數
-
----
-
-## 📤 使用 API
-
-此擴充功能會對以下 API 發出請求：
-
-```
-POST https://grok.com/rest/rate-limits
-```
-
-**範例請求內容：**
-
-```json
-{
-  "requestKind": "DEFAULT",
-  "modelName": "grok-3"
-}
-```
-
-**範例回應：**
-
-```json
-{
-  "remainingQueries": 42,
-  "totalQueries": 50
-}
-```
-
-Grok 4 查詢格式類似，只需將 `modelName` 改為 `grok-4`，`requestKind` 可為 `HEAVY` 或 `DEFAULT`。
 
 ---
 
@@ -112,5 +106,5 @@ Grok 4 查詢格式類似，只需將 `modelName` 改為 `grok-4`，`requestKind
 
 ## 📬 聯絡方式
 
-有建議或想法嗎？
+有建議或想法嗎？  
 歡迎 [提交 issue](https://github.com/JoshuaWang2211/grok-rate-checker/issues)
