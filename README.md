@@ -48,6 +48,15 @@
 
 ---
 
+
+---
+
+## 🧮 Token 消耗規則（付費用戶）
+
+* **Grok 3**：每次對話消耗 **1 個 Low Effort token**
+* **Grok 4**：每次對話消耗 **4 個 Low Effort + 1 個 High Effort token**
+
+
 ## 📸 截圖預覽
 
 ### 🔐 付費用戶（SuperGrok）UI
