@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Grok Rate Checker",
-  "version": "1.4",
+  "version": "1.5",
   "description": "Displays remaining Grok queries (Grok 3 & Grok 4) in real-time. Created by Joshua Wang.",
   "permissions": ["activeTab", "storage"],
   "host_permissions": ["https://grok.com/*"],
