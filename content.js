@@ -48,6 +48,7 @@ function makeDraggable(element) {
 function createDisplay() {
   if (!displayDiv) {
     displayDiv = document.createElement("div");
+    displayDiv.id = "grok-rate-checker";
     displayDiv.style.position = "fixed";
     displayDiv.style.top = "150px";
     displayDiv.style.right = "20px";
@@ -61,10 +62,14 @@ function createDisplay() {
     displayDiv.style.fontFamily = "Arial, sans-serif";
     displayDiv.style.cursor = "move";
     displayDiv.style.transition = "transform 0.2s ease";
+    displayDiv.style.minWidth = "200px";
     displayDiv.onmouseover = () => displayDiv.style.transform = "scale(1.05)";
     displayDiv.onmouseout = () => displayDiv.style.transform = "scale(1)";
-    document.body.appendChild(displayDiv);
-    makeDraggable(displayDiv);
+    
+    if (document.body) {
+      document.body.appendChild(displayDiv);
+      makeDraggable(displayDiv);
+    }
   }
 }
 
@@ -72,14 +77,12 @@ function updateDisplay(data) {
   createDisplay();
   const shouldFade = (kind, type) => lastData[kind][type] !== null && lastData[kind][type] !== data[kind][type];
 
-  // 自動偵測用戶類型：檢查是否有 token 數據
   const isPaidUser = data.DEFAULT?.remainingTokens !== undefined && data.DEFAULT?.remainingTokens !== null;
   const hasTokenData = isPaidUser && (data.DEFAULT.totalTokens > 0 || data.DEFAULT.remainingTokens > 0);
 
   let tokenSectionHtml = '';
   
   if (hasTokenData) {
-    // 付費用戶：顯示 Token 系統
     tokenSectionHtml = `
       <div style="font-size: 14px; color: #34495e; font-weight: bold; margin-bottom: 4px;">Tokens</div>
       <div style="display: table; font-size: 16px; width: 100%;">
@@ -94,7 +97,6 @@ function updateDisplay(data) {
       </div>
     `;
   } else {
-    // 免費用戶：顯示傳統 Query 系統
     tokenSectionHtml = `
       <div style="display: table; font-size: 16px; width: 100%;">
         <div style="display: table-row;">
@@ -119,53 +121,60 @@ function updateDisplay(data) {
 
   let specialFeaturesHtml = '';
   if (hasTokenData) {
-    // 付費用戶顯示分類標題
     specialFeaturesHtml = `<div style="font-size: 14px; color: #34495e; font-weight: bold; margin-top: 12px; margin-bottom: 4px;">Special Features</div>`;
   }
 
-  displayDiv.innerHTML = `
-    <strong style="color: #2c3e50; font-size: 16px; display: block; text-align: center;">Grok Query Balance</strong>
-    <div style="margin-top: 8px;">
-      ${tokenSectionHtml}
-      ${hasTokenData ? specialFeaturesHtml : ''}
-      ${hasTokenData ? `
-      <div style="display: table; font-size: 16px; width: 100%;">
-        <div style="display: table-row;">
-          <span style="display: table-cell; padding-right: 12px; color: #5f6a6a;">DeepSearch:</span>
-          <span style="display: table-cell; text-align: right; color: #27ae60; ${shouldFade('DEEPSEARCH', 'remaining') || shouldFade('DEEPSEARCH', 'total') ? 'animation: fadeIn 0.5s;' : ''}">${data.DEEPSEARCH?.remaining || 0} / ${data.DEEPSEARCH?.total || 0}</span>
-        </div>
-        <div style="display: table-row;">
-          <span style="display: table-cell; padding-right: 12px; color: #5f6a6a;">DeeperSearch:</span>
-          <span style="display: table-cell; text-align: right; color: #c0392b; ${shouldFade('DEEPERSEARCH', 'remaining') || shouldFade('DEEPERSEARCH', 'total') ? 'animation: fadeIn 0.5s;' : ''}">${data.DEEPERSEARCH?.remaining || 0} / ${data.DEEPERSEARCH?.total || 0}</span>
-        </div>
-        <div style="display: table-row;">
-          <span style="display: table-cell; padding-right: 12px; color: #5f6a6a;">Think:</span>
-          <span style="display: table-cell; text-align: right; color: #8e44ad; ${shouldFade('REASONING', 'remaining') || shouldFade('REASONING', 'total') ? 'animation: fadeIn 0.5s;' : ''}">${data.REASONING?.remaining || 0} / ${data.REASONING?.total || 0}</span>
-        </div>
-        <div style="display: table-row;">
-          <span style="display: table-cell; padding-right: 12px; color: #5f6a6a;">Grok 4 Heavy:</span>
-          <span style="display: table-cell; text-align: right; color: #2c3e50; ${shouldFade('GROK4HEAVY', 'remaining') || shouldFade('GROK4HEAVY', 'total') ? 'animation: fadeIn 0.5s;' : ''}">${data.GROK4HEAVY?.remaining || 0} / ${data.GROK4HEAVY?.total || 0}</span>
-        </div>
-      </div>` : ''}
-    </div>
-  `;
-  lastData = { ...data };
-
-  const styleSheet = document.createElement("style");
-  styleSheet.textContent = `
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-  `;
-  if (!document.head.querySelector("style[data-fadein]")) {
-    styleSheet.setAttribute("data-fadein", "true");
-    document.head.appendChild(styleSheet);
+  if (displayDiv) {
+    displayDiv.innerHTML = `
+      <strong style="color: #2c3e50; font-size: 16px; display: block; text-align: center;">Grok Query Balance</strong>
+      <div style="margin-top: 8px;">
+        ${tokenSectionHtml}
+        ${hasTokenData ? specialFeaturesHtml : ''}
+        ${hasTokenData ? `
+        <div style="display: table; font-size: 16px; width: 100%;">
+          <div style="display: table-row;">
+            <span style="display: table-cell; padding-right: 12px; color: #5f6a6a;">DeepSearch:</span>
+            <span style="display: table-cell; text-align: right; color: #27ae60; ${shouldFade('DEEPSEARCH', 'remaining') || shouldFade('DEEPSEARCH', 'total') ? 'animation: fadeIn 0.5s;' : ''}">${data.DEEPSEARCH?.remaining || 0} / ${data.DEEPSEARCH?.total || 0}</span>
+          </div>
+          <div style="display: table-row;">
+            <span style="display: table-cell; padding-right: 12px; color: #5f6a6a;">DeeperSearch:</span>
+            <span style="display: table-cell; text-align: right; color: #c0392b; ${shouldFade('DEEPERSEARCH', 'remaining') || shouldFade('DEEPERSEARCH', 'total') ? 'animation: fadeIn 0.5s;' : ''}">${data.DEEPERSEARCH?.remaining || 0} / ${data.DEEPERSEARCH?.total || 0}</span>
+          </div>
+          <div style="display: table-row;">
+            <span style="display: table-cell; padding-right: 12px; color: #5f6a6a;">Think:</span>
+            <span style="display: table-cell; text-align: right; color: #8e44ad; ${shouldFade('REASONING', 'remaining') || shouldFade('REASONING', 'total') ? 'animation: fadeIn 0.5s;' : ''}">${data.REASONING?.remaining || 0} / ${data.REASONING?.total || 0}</span>
+          </div>
+          <div style="display: table-row;">
+            <span style="display: table-cell; padding-right: 12px; color: #5f6a6a;">Grok 4 Heavy:</span>
+            <span style="display: table-cell; text-align: right; color: #2c3e50; ${shouldFade('GROK4HEAVY', 'remaining') || shouldFade('GROK4HEAVY', 'total') ? 'animation: fadeIn 0.5s;' : ''}">${data.GROK4HEAVY?.remaining || 0} / ${data.GROK4HEAVY?.total || 0}</span>
+          </div>
+        </div>` : ''}
+      </div>
+    `;
   }
   
-  // 用於除錯：顯示偵測結果
-  console.log(`User type detected: ${hasTokenData ? 'Paid (SuperGrok)' : 'Free'} - Token data available: ${isPaidUser}`);
-  console.log("Display updated:", data);
+  lastData = { ...data };
+  addAnimationStyles();
+}
+
+function addAnimationStyles() {
+  if (!document.head.querySelector("#grok-checker-styles")) {
+    const styleSheet = document.createElement("style");
+    styleSheet.id = "grok-checker-styles";
+    styleSheet.textContent = `
+      @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+      }
+      #grok-rate-checker {
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+      }
+    `;
+    document.head.appendChild(styleSheet);
+  }
 }
 
 function fetchRateLimits(kind, model) {
@@ -181,7 +190,9 @@ function fetchRateLimits(kind, model) {
     })
   })
   .then(response => {
-    console.log(`Request status for ${kind} (${model}):`, response.status);
+    if (response.status === 401 || response.status === 403) {
+      throw new Error('UNAUTHORIZED');
+    }
     if (response.ok) {
       return response.json();
     } else {
@@ -191,7 +202,6 @@ function fetchRateLimits(kind, model) {
 }
 
 function checkRateLimits() {
-  // 基本查詢（所有用戶都需要）
   const baseQueries = [
     { kind: "DEFAULT", model: "grok-3", displayKey: "DEFAULT" },
     { kind: "DEEPSEARCH", model: "grok-3", displayKey: "DEEPSEARCH" },
@@ -200,8 +210,8 @@ function checkRateLimits() {
   ];
   
   const results = {};
+  let isUnauthorized = false;
 
-  // 先執行基本查詢
   Promise.all(baseQueries.map(({ kind, model, displayKey }) => 
     fetchRateLimits(kind, model)
       .then(data => {
@@ -221,9 +231,11 @@ function checkRateLimits() {
             total: data.totalQueries
           };
         }
-        console.log(`Rate limit data for ${displayKey}:`, data);
       })
       .catch(err => {
+        if (err.message === 'UNAUTHORIZED') {
+          isUnauthorized = true;
+        }
         if (displayKey === 'DEFAULT') {
           results[displayKey] = { 
             remaining: "Error", 
@@ -237,23 +249,61 @@ function checkRateLimits() {
             total: "Error"
           };
         }
-        console.log(`Error fetching rate-limits for ${displayKey}:`, err);
       })
   ))
   .then(() => {
-    // 檢查是否為付費用戶
+    createDisplay();
+    
+    if (isUnauthorized) {
+      if (displayDiv) {
+        displayDiv.innerHTML = `
+          <strong style="color: #2c3e50; font-size: 16px; display: block; text-align: center;">Grok Query Balance</strong>
+          <div style="margin-top: 8px;">
+            <div style="display: table; font-size: 16px; width: 100%;">
+              <div style="display: table-row;">
+                <span style="display: table-cell; padding-right: 12px; color: #5f6a6a;">Grok 3:</span>
+                <span style="display: table-cell; text-align: right; color: #7f8c8d;">Login Required</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      return;
+    }
+
+    const allZeroQueries = (
+      (results.DEEPSEARCH?.remaining === 0 && results.DEEPSEARCH?.total === 0) &&
+      (results.DEEPERSEARCH?.remaining === 0 && results.DEEPERSEARCH?.total === 0) &&
+      (results.REASONING?.remaining === 0 && results.REASONING?.total === 0)
+    );
+    
+    if (allZeroQueries) {
+      if (displayDiv) {
+        displayDiv.innerHTML = `
+          <strong style="color: #2c3e50; font-size: 16px; display: block; text-align: center;">Grok Query Balance</strong>
+          <div style="margin-top: 8px;">
+            <div style="display: table; font-size: 16px; width: 100%;">
+              <div style="display: table-row;">
+                <span style="display: table-cell; padding-right: 12px; color: #5f6a6a;">Grok 3:</span>
+                <span style="display: table-cell; text-align: right; color: #2980b9;">${results.DEFAULT?.lowEffortRateLimits?.remainingQueries || 0} / ${results.DEFAULT?.totalTokens || '?'}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      return;
+    }
+
     const isPaidUser = results.DEFAULT?.remainingTokens !== undefined && results.DEFAULT?.remainingTokens !== null;
     const hasTokenData = isPaidUser && (results.DEFAULT.totalTokens > 0 || results.DEFAULT.remainingTokens > 0);
     
     if (hasTokenData) {
-      // 付費用戶：查詢 Grok 4 Heavy
       fetchRateLimits("DEFAULT", "grok-4-heavy")
         .then(data => {
           results.GROK4HEAVY = {
             remaining: data.remainingQueries,
             total: data.totalQueries
           };
-          console.log('Rate limit data for GROK4HEAVY:', data);
           updateDisplay(results);
         })
         .catch(err => {
@@ -261,21 +311,20 @@ function checkRateLimits() {
             remaining: "Error", 
             total: "Error"
           };
-          console.log('Error fetching rate-limits for GROK4HEAVY:', err);
           updateDisplay(results);
         });
     } else {
-      // 免費用戶：直接顯示結果
       updateDisplay(results);
     }
+  })
+  .catch(err => {
+    console.log("Error in checkRateLimits:", err);
   });
 }
 
-console.log("Grok Rate Checker loaded");
 checkRateLimits();
 setInterval(checkRateLimits, 5000);
 
 document.addEventListener("submit", function() {
-  console.log("Form submitted, checking rate-limits...");
   setTimeout(checkRateLimits, 1000);
 });
