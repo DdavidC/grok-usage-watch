@@ -13,8 +13,8 @@
 ## ✨ 功能特色
 
 * ✅ 即時查看 Grok 剩餘對話次數與 Token 額度（支援 Grok 3 + Grok 4）
-* 🪙 付費用戶支援 Token 顯示（Low Effort / High Effort 模式）
-* 🔄 免費用戶維持 query-based 顯示（與舊版相容）
+* 🪙 付費用戶支援 Token 顯示
+* 🔄 免費用戶維持 query-based 顯示
 * 🎨 有風格且動畫平滑的浮動介面
 * 🧲 完全可拖曳的位置設計
 * ⚡ 每 5 秒自動更新一次
@@ -58,6 +58,7 @@
 
 * `manifest.json`：擴充功能設定與權限定義
 * `content.js`：注入頁面的腳本，負責即時抓取並顯示剩餘對話次數
+* `background.js`：點擊工具列圖示可直接開啟 grok.com
 
 ---
 
@@ -74,6 +75,7 @@
 此專案先前以「Grok Rate Checker」發佈，版本號最高至 **1.5**。
 現在重新以 **Grok Usage Watch** 名稱上架，並以 **1.0.2** 為起始版本號。
 未來版本號將依 Chrome Web Store 釋出進度遞增。
+* **1.0.3**：新增 `background.js`，點擊工具列 icon 會自動開啟 grok.com。
 
 ---
 
