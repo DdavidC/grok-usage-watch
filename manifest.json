@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Grok Usage Watch – Rate Limit Tracker",
-  "version": "1.0.2",
-  "description": "Track your Grok rate limits in real time. Supports Grok 3, 4, DeepSearch, Think, and more.",
+  "version": "1.0.3",
+  "description": "Track your Grok rate limits in real time. Supports Grok 3, Grok 4, DeepSearch, Think, and more.",
   "host_permissions": ["https://grok.com/*"],
   "icons": {
     "16": "icon16.png",
@@ -14,5 +14,16 @@
       "matches": ["https://grok.com/*"],
       "js": ["content.js"]
     }
-  ]
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    },
+    "default_title": "Open Grok.com"
+  }
 }
