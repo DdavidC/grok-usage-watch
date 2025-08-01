@@ -88,11 +88,11 @@ function updateDisplay(data) {
       <div style="display: table; font-size: 16px; width: 100%;">
         <div style="display: table-row;">
           <span style="display: table-cell; padding-right: 12px; color: #5f6a6a;">Low Effort:</span>
-          <span style="display: table-cell; text-align: right; color: #2980b9;">${data.DEFAULT?.lowEffortRateLimits?.remainingQueries || 0} / ${data.DEFAULT?.totalTokens || 140}</span>
+          <span style="display: table-cell; text-align: right; color: #2980b9;">${data.DEFAULT?.lowEffortRateLimits?.remainingQueries || 0} / ${data.DEFAULT?.totalTokens || 'N/A'}</span>
         </div>
         <div style="display: table-row;">
           <span style="display: table-cell; padding-right: 12px; color: #5f6a6a;">High Effort:</span>
-          <span style="display: table-cell; text-align: right; color: #e67e22;">${data.DEFAULT?.highEffortRateLimits?.remainingQueries || 0} / ${Math.floor((data.DEFAULT?.totalTokens || 140) / 4)}</span>
+          <span style="display: table-cell; text-align: right; color: #e67e22;">${data.DEFAULT?.highEffortRateLimits?.remainingQueries || 0} / ${data.DEFAULT?.highEffortRateLimits?.cost && data.DEFAULT?.totalTokens ? Math.floor(data.DEFAULT.totalTokens / data.DEFAULT.highEffortRateLimits.cost) : 'N/A'}</span>
         </div>
       </div>
     `;
@@ -262,7 +262,7 @@ function checkRateLimits() {
             <div style="display: table; font-size: 16px; width: 100%;">
               <div style="display: table-row;">
                 <span style="display: table-cell; padding-right: 12px; color: #5f6a6a;">Grok 3:</span>
-                <span style="display: table-cell; text-align: right; color: #7f8c8d;">Login Required</span>
+                <span style="display: table-cell; text-align: right; color: #7f8c8d;">Loading...</span>
               </div>
             </div>
           </div>
@@ -285,7 +285,7 @@ function checkRateLimits() {
             <div style="display: table; font-size: 16px; width: 100%;">
               <div style="display: table-row;">
                 <span style="display: table-cell; padding-right: 12px; color: #5f6a6a;">Grok 3:</span>
-                <span style="display: table-cell; text-align: right; color: #2980b9;">${results.DEFAULT?.lowEffortRateLimits?.remainingQueries || 0} / ${results.DEFAULT?.totalTokens || '?'}</span>
+                <span style="display: table-cell; text-align: right; color: #2980b9;">${results.DEFAULT?.lowEffortRateLimits?.remainingQueries || 0} / ${results.DEFAULT?.totalTokens || 'N/A'}</span>
               </div>
             </div>
           </div>

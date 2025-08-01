@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Grok Usage Watch – Control de Uso en Tiempo Real"
+  },
+  "extensionDescription": {
+    "message": "Ve tus consultas de Grok restantes en tiempo real. Compatible con Grok 3, Grok 4, DeepSearch, Think y Grok 4 Heavy."
+  },
+  "actionTitle": {
+    "message": "Abrir Grok.com"
+  }
+}

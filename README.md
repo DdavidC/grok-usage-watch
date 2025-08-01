@@ -25,9 +25,7 @@
 
 ## 📸 截圖預覽
 
-### 🔐 付費用戶（SuperGrok）UI
-
-顯示 Token 機制（Low / High Effort 分開計算）：
+### 🔐 付費用戶 UI
 
 ![Grok Usage Watch screenshot](screenshot.png)
 
@@ -35,22 +33,13 @@
 
 ### 🆓 免費用戶 UI
 
-使用傳統對話次數查詢邏輯：
-
 ![Grok Usage Watch screenshot2](screenshot2.png)
 
 ---
 
 ## 🛠 安裝方式
 
-1. 從 Chrome Web Store 安裝： [點此安裝](https://chrome.google.com/webstore/detail/bmpboaihdkpkjehbceegdmndkonlpdge)
-2. 或者下載此專案並手動載入：
-
-   * 開啟瀏覽器輸入 `chrome://extensions/`
-   * 開啟右上角的 **開發人員模式**
-   * 點選 **「載入未封裝項目」**
-   * 選擇此專案資料夾
-   * 前往 [https://grok.com](https://grok.com) 開始使用 🎉
+從 Chrome Web Store 安裝： [點此安裝](https://chrome.google.com/webstore/detail/bmpboaihdkpkjehbceegdmndkonlpdge)
 
 ---
 
@@ -75,7 +64,8 @@
 此專案先前以「Grok Rate Checker」發佈，版本號最高至 **1.5**。
 現在重新以 **Grok Usage Watch** 名稱上架，並以 **1.0.2** 為起始版本號。
 未來版本號將依 Chrome Web Store 釋出進度遞增。
-* **1.0.3**：新增 `background.js`，點擊工具列 icon 會自動開啟 grok.com。
+
+[更新紀錄](./CHANGELOG.md)
 
 ---
 
@@ -90,9 +80,3 @@
 
 有建議或想法嗎？
 歡迎 [提交 issue](https://github.com/JoshuaWang2211/grok-usage-watch/issues)
-
----
-
-## 📜 授權條款
-
-本專案採用 MIT 授權，詳見 [LICENSE](./LICENSE)
