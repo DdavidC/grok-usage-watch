@@ -3,7 +3,7 @@
     "message": "Grok Usage Watch – Monitor Limitów Użytkowania"
   },
   "extensionDescription": {
-    "message": "Śledź użycie Grok w czasie rzeczywistym. Wyświetla pozostałe tokens dla Grok 3 i Grok 4 (zastępując Think i DeepSearch), oraz liczby zapytań dla Grok 4 Heavy."
+    "message": "Śledź tokens Grok i poziom Effort w czasie rzeczywistym. Obsługuje Grok 3 i Grok 4."
   },
   "actionTitle": {
     "message": "Otwórz Grok.com"

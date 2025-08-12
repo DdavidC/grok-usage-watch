@@ -3,7 +3,7 @@
     "message": "Grok Usage Watch – Control de Uso en Tiempo Real"
   },
   "extensionDescription": {
-    "message": "Rastrea tu uso de Grok en tiempo real. Muestra tokens restantes para Grok 3 y Grok 4 (reemplazando Think y DeepSearch), además del conteo de consultas para Grok 4 Heavy."
+    "message": "Rastrea tokens de Grok y nivel de Effort en tiempo real. Compatible con Grok 3 y Grok 4."
   },
   "actionTitle": {
     "message": "Abrir Grok.com"

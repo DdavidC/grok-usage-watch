@@ -3,7 +3,7 @@
     "message": "Grok Usage Watch – Kullanım Limiti Takipçisi"
   },
   "extensionDescription": {
-    "message": "Grok kullanımınızı gerçek zamanlı takip edin. Grok 3 ve Grok 4 için kalan tokens ile Grok 4 Heavy için sorgu sayılarını görüntüler (Think ve DeepSearch'ün yerini alarak)."
+    "message": "Grok tokens ve Effort seviyesini gerçek zamanlı takip edin. Grok 3 ve Grok 4'ü destekler."
   },
   "actionTitle": {
     "message": "Grok.com'u Aç"

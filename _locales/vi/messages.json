@@ -3,7 +3,7 @@
     "message": "Grok Usage Watch – Theo Dõi Giới Hạn Sử Dụng"
   },
   "extensionDescription": {
-    "message": "Theo dõi việc sử dụng Grok của bạn theo thời gian thực. Hiển thị tokens còn lại cho Grok 3 và Grok 4 (thay thế Think và DeepSearch), cộng với số lượng truy vấn cho Grok 4 Heavy."
+    "message": "Theo dõi tokens Grok và mức độ Effort theo thời gian thực. Hỗ trợ Grok 3 và Grok 4."
   },
   "actionTitle": {
     "message": "Mở Grok.com"
