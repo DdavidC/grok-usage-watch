@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Grok Usage Watch – Gebruikslimiet Tracker"
+  },
+  "extensionDescription": {
+    "message": "Volg je Grok-gebruik in realtime. Toont resterende tokens voor Grok 3 en Grok 4 (ter vervanging van Think en DeepSearch), plus querytellingen voor Grok 4 Heavy."
+  },
+  "actionTitle": {
+    "message": "Open Grok.com"
+  }
+}

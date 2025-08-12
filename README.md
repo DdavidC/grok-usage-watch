@@ -1,18 +1,20 @@
 # 🌟 Grok Usage Watch – Rate Limit Tracker
 
-> 🔎 即時顯示 Grok 剩餘對話與 Token 使用情況（支援 Grok 3 與 Grok 4）
+> 🔎 即時顯示 Grok 使用量（支援 Grok 3 與 Grok 4）
 
 ---
 
 ## 📌 功能介紹
 
-**Grok Usage Watch** 是一個輕量級瀏覽器擴充功能，可即時顯示你在 Grok 的剩餘對話次數與 Token 額度。
+**Grok Usage Watch** 是一款輕量級瀏覽器擴充功能，可即時顯示 Grok 的使用量，以及每次請求的「effort 等級」。
+
+每次對話的「effort 等級」會由 Grok 系統根據 xAI 的內部邏輯自動判斷，代表該請求的任務難度與耗用的 Token 強度，讓你更清楚掌握資源使用狀況。
 
 ---
 
 ## ✨ 功能特色
 
-* ✅ 即時查看 Grok 剩餘對話次數與 Token 額度（支援 Grok 3 + Grok 4）
+* ✅ 即時查看 Grok 的使用量（支援 Grok 3 + Grok 4）
 * 🎨 美觀流暢的浮動介面，可自由拖曳調整位置
 * ⚡ 每 5 秒自動更新一次
 * 🧠 安裝後即可於 [grok.com](https://grok.com) 立即使用，無需額外設定
@@ -43,7 +45,7 @@
 ## 🧩 專案檔案說明
 
 * `manifest.json`：擴充功能設定與權限定義
-* `content.js`：注入頁面的腳本，負責即時抓取並顯示剩餘對話次數
+* `content.js`：注入頁面的腳本，負責即時抓取並顯示剩餘額度
 * `background.js`：點擊工具列圖示可直接開啟 grok.com
 
 ---

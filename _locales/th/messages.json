@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Grok Usage Watch – ตัวติดตามขีดจำกัดการใช้งาน"
+  },
+  "extensionDescription": {
+    "message": "ติดตามการใช้งาน Grok ของคุณแบบเรียลไทม์ แสดง tokens ที่เหลือสำหรับ Grok 3 และ Grok 4 (แทนที่ Think และ DeepSearch) รวมถึงจำนวนคิวรีสำหรับ Grok 4 Heavy"
+  },
+  "actionTitle": {
+    "message": "เปิด Grok.com"
+  }
+}

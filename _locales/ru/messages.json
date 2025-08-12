@@ -3,7 +3,7 @@
     "message": "Grok Usage Watch – Мониторинг Использования"
   },
   "extensionDescription": {
-    "message": "Смотрите остаток ваших Grok запросов в реальном времени. Работает с Grok 3, Grok 4, DeepSearch, Think и Grok 4 Heavy."
+    "message": "Отслеживайте использование Grok в реальном времени. Отображает оставшиеся tokens для Grok 3 и Grok 4 (заменяющие Think и DeepSearch), а также количество запросов для Grok 4 Heavy."
   },
   "actionTitle": {
     "message": "Открыть Grok.com"

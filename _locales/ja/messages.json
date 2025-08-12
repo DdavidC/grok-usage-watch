@@ -3,7 +3,7 @@
     "message": "Grok Usage Watch – 即時利用状況トラッカー"
   },
   "extensionDescription": {
-    "message": "Grok の残り会話回数をリアルタイムで監視。Grok 3、Grok 4、DeepSearch、Think、Grok 4 Heavy に対応。"
+    "message": "Grok の使用状況をリアルタイムで追跡。Grok 3 および Grok 4（Think と DeepSearch を置き換え）の残り tokens と、Grok 4 Heavy のクエリ数を表示。"
   },
   "actionTitle": {
     "message": "Grok.com を開く"

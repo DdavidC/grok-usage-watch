@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Grok Usage Watch – Pelacak Batas Penggunaan"
+  },
+  "extensionDescription": {
+    "message": "Lacak penggunaan Grok Anda secara real-time. Menampilkan sisa tokens untuk Grok 3 dan Grok 4 (menggantikan Think dan DeepSearch), plus jumlah kueri untuk Grok 4 Heavy."
+  },
+  "actionTitle": {
+    "message": "Buka Grok.com"
+  }
+}

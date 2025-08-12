@@ -1,9 +1,9 @@
 {
   "extensionName": {
-    "message": "Grok Usage Watch – 即时用量追踪"
+    "message": "Grok Usage Watch – 实时用量追踪"
   },
   "extensionDescription": {
-    "message": "实时监控 Grok 剩余对话次数，支持 Grok 3、Grok 4、DeepSearch、Think 和 Grok 4 Heavy。"
+    "message": "实时监控 Grok 使用量。显示 Grok 3 和 Grok 4（取代 Think 和 DeepSearch）的剩余 tokens，以及 Grok 4 Heavy 的查询次数。"
   },
   "actionTitle": {
     "message": "前往 Grok.com"
