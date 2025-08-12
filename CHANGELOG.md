@@ -2,6 +2,11 @@
 
 ---
 
+## v1.0.6 - 2025-08-12
+- 新增「Refill in」倒數時間顯示，當額度用完時，會顯示距離下次回補的剩餘時間。
+
+---
+
 ## v1.0.5 - 2025-08-12
 - 移除已淘汰的 Think、DeepSearch、DeeperSearch，符合 xAI 最新政策。  
 - 因應 xAI 已將 Grok 4 下放給免費用戶，現在所有用戶（包含免費與付費）皆一致顯示 High/Low Effort Tokens。

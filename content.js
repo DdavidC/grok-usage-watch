@@ -42,6 +42,58 @@ function makeDraggable(element) {
   }
 }
 
+function formatWaitTime(seconds) {
+  if (!seconds || seconds <= 0) return "";
+  
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  
+  if (minutes > 0) {
+    return `${minutes}m ${remainingSeconds}s`;
+  } else {
+    return `${remainingSeconds}s`;
+  }
+}
+
+function getWaitTimeDisplay(data) {
+  const lowEffortWaitTime = data.DEFAULT?.lowEffortRateLimits?.waitTimeSeconds;
+  const highEffortWaitTime = data.DEFAULT?.highEffortRateLimits?.waitTimeSeconds;
+  
+  const hasLowEffortWait = lowEffortWaitTime && lowEffortWaitTime > 0;
+  const hasHighEffortWait = highEffortWaitTime && highEffortWaitTime > 0;
+  
+  if (!hasLowEffortWait && !hasHighEffortWait) {
+    return "";
+  }
+  
+  let waitTimeHtml = `
+    <div style="font-size: 14px; color: #34495e; font-weight: bold; margin-top: 12px; margin-bottom: 4px;">Refill in</div>
+    <div style="display: table; font-size: 16px; width: 100%;">
+  `;
+  
+  if (hasLowEffortWait) {
+    waitTimeHtml += `
+      <div style="display: table-row;">
+        <span style="display: table-cell; padding-right: 12px; color: #5f6a6a;">Low Effort:</span>
+        <span style="display: table-cell; text-align: right; color: #2980b9;">${formatWaitTime(lowEffortWaitTime)}</span>
+      </div>
+    `;
+  }
+  
+  if (hasHighEffortWait) {
+    waitTimeHtml += `
+      <div style="display: table-row;">
+        <span style="display: table-cell; padding-right: 12px; color: #5f6a6a;">High Effort:</span>
+        <span style="display: table-cell; text-align: right; color: #e67e22;">${formatWaitTime(highEffortWaitTime)}</span>
+      </div>
+    `;
+  }
+  
+  waitTimeHtml += `</div>`;
+  
+  return waitTimeHtml;
+}
+
 function createDisplay() {
   if (!displayDiv) {
     displayDiv = document.createElement("div");
@@ -75,6 +127,8 @@ function updateDisplay(data) {
   const shouldFade = (kind, type) => lastData[kind][type] !== null && lastData[kind][type] !== data[kind][type];
 
   if (displayDiv) {
+    const waitTimeDisplay = getWaitTimeDisplay(data);
+    
     displayDiv.innerHTML = `
       <strong style="color: #2c3e50; font-size: 16px; display: block; text-align: center;">Grok Query Balance</strong>
       <div style="margin-top: 8px;">
@@ -97,6 +151,7 @@ function updateDisplay(data) {
           </div>
         </div>
       </div>
+      ${waitTimeDisplay}
     `;
   }
   
