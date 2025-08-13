@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Grok Usage Watch – Kullanım Limiti Takipçisi"
+  },
+  "extensionDescription": {
+    "message": "Grok tokens ve Effort seviyesini gerçek zamanlı takip edin. Grok 3 ve Grok 4'ü destekler."
+  },
+  "actionTitle": {
+    "message": "Grok.com'u Aç"
+  }
+}

@@ -3,7 +3,7 @@
     "message": "Grok Usage Watch – 실시간 사용량 추적"
   },
   "extensionDescription": {
-    "message": "Grok 남은 대화 횟수를 실시간으로 확인하세요. Grok 3, Grok 4, DeepSearch, Think, Grok 4 Heavy 지원."
+    "message": "Grok tokens과 Effort 수준을 실시간으로 추적합니다. Grok 3와 Grok 4를 지원합니다."
   },
   "actionTitle": {
     "message": "Grok.com 열기"

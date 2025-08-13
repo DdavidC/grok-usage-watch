@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Grok Usage Watch – Gebruikslimiet Tracker"
+  },
+  "extensionDescription": {
+    "message": "Volg Grok tokens en Effort-niveau in realtime. Ondersteunt Grok 3 en Grok 4."
+  },
+  "actionTitle": {
+    "message": "Open Grok.com"
+  }
+}

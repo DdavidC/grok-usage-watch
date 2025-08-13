@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Grok Usage Watch – Theo Dõi Giới Hạn Sử Dụng"
+  },
+  "extensionDescription": {
+    "message": "Theo dõi tokens Grok và mức độ Effort theo thời gian thực. Hỗ trợ Grok 3 và Grok 4."
+  },
+  "actionTitle": {
+    "message": "Mở Grok.com"
+  }
+}

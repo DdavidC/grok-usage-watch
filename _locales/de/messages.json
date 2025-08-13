@@ -3,7 +3,7 @@
     "message": "Grok Usage Watch – Nutzungskontrolle"
   },
   "extensionDescription": {
-    "message": "Sehen Sie Ihre verbleibenden Grok-Anfragen in Echtzeit. Funktioniert mit Grok 3, Grok 4, DeepSearch, Think und Grok 4 Heavy."
+    "message": "Verfolgen Sie Grok tokens und Effort-Level in Echtzeit. Unterstützt Grok 3 und Grok 4."
   },
   "actionTitle": {
     "message": "Grok.com öffnen"
