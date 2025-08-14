@@ -19,6 +19,7 @@ Whether you use Grok 3, Grok 4, or Grok 4 Heavy, you can easily track your usage
 * ✅ Real-time usage monitoring
 * 🎨 Floating, draggable overlay UI
 * ⚡ Refreshes every 5 seconds
+* 🧠 Instantly works on grok.com after installation. No setup needed
 * 🌍 Compatible with **Chrome, Edge, Brave**, and other Chromium-based browsers
 * 🆓 Free, no ads
 
