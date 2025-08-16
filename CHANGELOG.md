@@ -2,6 +2,17 @@
 
 ---
 
+## v1.1.0 - 2025-08-16
+
+* Added Settings UI with a simple layout and toggle controls.
+* Added dark/light color mode toggle.
+* Panel position is now saved and restored across sessions.
+* Ensured UI panel stays within the visible browser window at all times.
+* Added panel collapse/expand feature with animated toggle.
+* Added "About" section.
+
+---
+
 ## v1.0.6 - 2025-08-12
 
 * Added "Refill in" countdown to show time remaining until token refill when limit is reached.
