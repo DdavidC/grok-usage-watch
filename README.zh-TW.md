@@ -26,13 +26,9 @@
 
 ## 📸 截圖預覽
 
-### 🔐 SuperGrok 用戶 UI
-
 ![Grok Usage Watch screenshot](assets/screenshot.png)
 
 ---
-
-### 🆓 Grok 用戶 UI
 
 ![Grok Usage Watch screenshot2](assets/screenshot2.png)
 

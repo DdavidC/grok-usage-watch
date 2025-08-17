@@ -26,13 +26,9 @@ It supports Grok 3, Grok 4, and Grok 4 Heavy, with a clean, draggable floating w
 
 ## 📸 Screenshots
 
-### 🔐 Subscribed Users
-
 ![Grok Usage Watch screenshot](assets/screenshot.png)
 
 ---
-
-### 🆓 Free Plan Users
 
 ![Grok Usage Watch screenshot2](assets/screenshot2.png)
 
