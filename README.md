@@ -8,7 +8,7 @@
 
 ## 📌 Introduction
 
-**Grok Usage Watch** Grok Usage Watch is a lightweight browser extension that displays your remaining Grok usage directly on Grok.com.
+**Grok Usage Watch** is a lightweight browser extension that displays your remaining Grok usage directly on Grok.com.
 
 It supports Grok 3, Grok 4, and Grok 4 Heavy, with a clean, draggable floating window that keeps your usage always visible.
 
