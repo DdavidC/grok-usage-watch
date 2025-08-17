@@ -2,6 +2,13 @@
 
 ---
 
+## v1.2.0 - 2025-08-17
+
+* Added UI scale options: users can now resize the interface (80%, 90%, 100%, 110%, 120%) to suit their preferences.
+* Added language support for Arabic (ar), Hindi (hi), Bengali (bn), Urdu (ur), Hebrew (he), Ukrainian (uk), and Hong Kong Traditional Chinese (zh_HK).
+
+---
+
 ## v1.1.0 - 2025-08-16
 
 * Added Settings UI with a simple layout and toggle controls.
