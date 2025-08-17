@@ -8,20 +8,19 @@
 
 ## 📌 Introduction
 
-**Grok Usage Watch** is a lightweight browser extension that shows your remaining Grok queries directly on Grok.com. It also displays the effort level of each request (as determined by Grok itself), so you can better understand how resources are being used.
+**Grok Usage Watch** Grok Usage Watch is a lightweight browser extension that displays your remaining Grok usage directly on Grok.com.
 
-Whether you use Grok 3, Grok 4, or Grok 4 Heavy, you can easily track your usage and token status in a clean floating window. Works immediately on grok.com after installation. No setup required.
+It supports Grok 3, Grok 4, and Grok 4 Heavy, with a clean, draggable floating window that keeps your usage always visible.
 
 ---
 
 ## ✨ Key Features
 
-* ✅ Real-time usage monitoring
-* 🎨 Floating, draggable overlay UI
-* ⚡ Refreshes every 5 seconds
-* 🧠 Instantly works on grok.com after installation. No setup needed
-* 🌍 Compatible with **Chrome, Edge, Brave**, and other Chromium-based browsers
-* 🆓 Free, no ads
+* Real-time usage tracking
+* Supports both free and subscribed Grok users
+* Draggable, floating overlay UI
+* Refill countdown timer when limits are hit 
+* Light/Dark mode toggle
 
 ---
 
@@ -29,13 +28,13 @@ Whether you use Grok 3, Grok 4, or Grok 4 Heavy, you can easily track your usage
 
 ### 🔐 Subscribed Users
 
-![Grok Usage Watch screenshot](screenshot.png)
+![Grok Usage Watch screenshot](assets/screenshot.png)
 
 ---
 
 ### 🆓 Free Plan Users
 
-![Grok Usage Watch screenshot2](screenshot2.png)
+![Grok Usage Watch screenshot2](assets/screenshot2.png)
 
 ---
 

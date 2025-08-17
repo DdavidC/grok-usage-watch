@@ -48,7 +48,8 @@ let isCollapsed = false;
 let settings = {
   hideGrok4Heavy: false,
   colorMode: 'light',
-  isCollapsed: false
+  isCollapsed: false,
+  uiScale: 1.0
 };
 
 let lastData = { 
@@ -157,7 +158,7 @@ function makeDraggable(element) {
     e.preventDefault();
     isDragging = true;
     
-    if (element.style.right) {
+    if (element.style.right && element.style.right !== 'auto') {
       const rect = element.getBoundingClientRect();
       element.style.left = rect.left + "px";
       element.style.right = "auto";
@@ -181,20 +182,37 @@ function makeDraggable(element) {
     let newTop = element.offsetTop - pos2;
     let newLeft = element.offsetLeft - pos1;
     
-    const windowWidth = window.innerWidth;
-    const windowHeight = window.innerHeight;
+    const currentScale = settings.uiScale || 1.0;
     const elementWidth = element.offsetWidth;
     const elementHeight = element.offsetHeight;
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
     
-    const minLeft = 0;
-    const maxLeft = windowWidth - elementWidth;
-    const minTop = 0;
-    const maxTop = windowHeight - elementHeight;
+    const scaledWidth = elementWidth * currentScale;
+    const scaledHeight = elementHeight * currentScale;
+    const overflowX = (scaledWidth - elementWidth) / 2;
+    const overflowY = (scaledHeight - elementHeight) / 2;
     
-    if (newLeft < minLeft) newLeft = minLeft;
-    if (newLeft > maxLeft) newLeft = maxLeft;
-    if (newTop < minTop) newTop = minTop;
-    if (newTop > maxTop) newTop = maxTop;
+    const scaledLeft = newLeft - overflowX;
+    const scaledRight = newLeft + elementWidth + overflowX;
+    const scaledTop = newTop - overflowY;
+    const scaledBottom = newTop + elementHeight + overflowY;
+    
+    if (scaledLeft < 0) {
+      newLeft = overflowX;
+    }
+    if (scaledRight > windowWidth) {
+      newLeft = windowWidth - elementWidth - overflowX;
+    }
+    if (scaledTop < 0) {
+      newTop = overflowY;
+    }
+    if (scaledBottom > windowHeight) {
+      newTop = windowHeight - elementHeight - overflowY;
+    }
+    
+    newLeft = Math.round(newLeft);
+    newTop = Math.round(newTop);
     
     element.style.top = newTop + "px";
     element.style.left = newLeft + "px";
@@ -430,6 +448,129 @@ function createColorModeToggle() {
   return container;
 }
 
+function createUIScaleSlider() {
+  const container = document.createElement('div');
+  const colors = getTextColors();
+  
+  container.className = 'no-drag';
+  container.style.cssText = `
+    width: 150px;
+    height: 32px;
+    position: relative;
+    background: ${settings.colorMode === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'};
+    border-radius: 6px;
+    padding: 4px 12px;
+  `;
+  
+  const track = document.createElement('div');
+  track.style.cssText = `
+    position: absolute;
+    top: 40%;
+    left: 12px;
+    right: 12px;
+    height: 2px;
+    background: ${settings.colorMode === 'dark' ? '#555' : '#ccc'};
+    border-radius: 1px;
+  `;
+  
+  const scaleValues = [0.8, 0.9, 1.0, 1.1, 1.2];
+  
+  scaleValues.forEach((scale, index) => {
+    const trackStart = 12;
+    const trackEnd = 150 - 12;
+    const trackLength = trackEnd - trackStart;
+    const tickPosition = trackStart + (index * trackLength) / (scaleValues.length - 1);
+    
+    const tickContainer = document.createElement('div');
+    tickContainer.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: ${tickPosition}px;
+      width: 30px;
+      height: 32px;
+      transform: translateX(-50%);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    `;
+    
+    const isActive = Math.abs(settings.uiScale - scale) < 0.01;
+    
+    const tick = document.createElement('div');
+    tick.style.cssText = `
+      width: 2px;
+      height: ${isActive ? '14px' : '10px'};
+      background: ${isActive ? '#27ae60' : (settings.colorMode === 'dark' ? '#777' : '#999')};
+      transition: all 0.2s ease;
+      pointer-events: none;
+      border-radius: 1px;
+      margin-bottom: 2px;
+    `;
+    
+    const label = document.createElement('div');
+    label.style.cssText = `
+      font-size: 8px;
+      color: ${isActive ? '#27ae60' : colors.label};
+      white-space: nowrap;
+      pointer-events: none;
+      font-weight: ${isActive ? 'bold' : 'normal'};
+      text-shadow: ${settings.colorMode === 'dark' ? '0 1px 1px rgba(0,0,0,0.5)' : 'none'};
+    `;
+    label.textContent = `${Math.round(scale * 100)}%`;
+    
+    tickContainer.appendChild(tick);
+    tickContainer.appendChild(label);
+    
+    tickContainer.onclick = (e) => {
+      e.stopPropagation();
+      applyUIScale(scale);
+    };
+    
+    tickContainer.onmouseenter = () => {
+      if (!isActive) {
+        tick.style.background = '#3498db';
+        tick.style.height = '12px';
+        tick.style.width = '3px';
+        label.style.color = '#3498db';
+        label.style.fontWeight = 'bold';
+      }
+    };
+    
+    tickContainer.onmouseleave = () => {
+      if (!isActive) {
+        tick.style.background = settings.colorMode === 'dark' ? '#777' : '#999';
+        tick.style.height = '10px';
+        tick.style.width = '2px';
+        label.style.color = colors.label;
+        label.style.fontWeight = 'normal';
+      }
+    };
+    
+    container.appendChild(tickContainer);
+  });
+  
+  container.appendChild(track);
+  return container;
+}
+
+function applyUIScale(scale) {
+  settings.uiScale = scale;
+  saveSettings();
+  applyCurrentUIScale();
+  setTimeout(() => {
+    updateDisplay(lastData);
+  }, 100);
+}
+
+function applyCurrentUIScale() {
+  if (displayDiv) {
+    displayDiv.style.transformOrigin = 'center center';
+    displayDiv.style.transform = `scale(${settings.uiScale})`;
+  }
+}
+
 function showSettings() {
   currentView = 'settings';
   updateDisplay(lastData);
@@ -468,23 +609,32 @@ function createDisplay() {
     if (savedPosition) {
       displayDiv.style.top = savedPosition.top + "px";
       displayDiv.style.left = savedPosition.left + "px";
+      displayDiv.style.right = "auto";
     } else {
-      displayDiv.style.top = "150px";
-      displayDiv.style.right = "20px";
+      const elementWidth = 200;
+      const padding = 20;
+      const defaultLeft = Math.max(0, window.innerWidth - elementWidth - padding);
+      const defaultTop = Math.max(0, padding);
+      
+      displayDiv.style.top = defaultTop + "px";
+      displayDiv.style.left = defaultLeft + "px";
+      displayDiv.style.right = "auto";
     }
     
     displayDiv.onmouseover = () => {
-      displayDiv.style.transform = "scale(1.05)";
+      const currentScale = settings.uiScale || 1.0;
+      const hoverScale = currentScale * 1.05;
+      displayDiv.style.transform = `scale(${hoverScale})`;
       displayDiv.style.transformOrigin = 'center';
     };
     displayDiv.onmouseout = () => {
-      displayDiv.style.transform = "scale(1)";
-      displayDiv.style.transformOrigin = '';
+      applyCurrentUIScale();
     };
     
     if (document.body) {
       document.body.appendChild(displayDiv);
       makeDraggable(displayDiv);
+      applyCurrentUIScale();
     }
   }
 }
@@ -505,6 +655,7 @@ function updateDisplay(data) {
     showMainView(data);
   }
   
+  applyCurrentUIScale();
   lastData = { ...data };
   addAnimationStyles();
 }
@@ -585,6 +736,17 @@ function showSettingsView() {
         </div>
       </div>
       
+      <div style="background: rgba(255,255,255,0.1); padding: 6px; border-radius: 4px; margin-bottom: 6px;">
+        <div style="display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <div style="flex: 1;">
+              <div style="font-size: 13px; font-weight: bold; color: ${colors.title};">UI Scale</div>
+            </div>
+          </div>
+          <div id="ui-scale-slider" style="display: flex; justify-content: center; height: 38px; align-items: center;"></div>
+        </div>
+      </div>
+      
       <div class="no-drag" style="text-align: center; margin-top: 8px; display: flex; justify-content: space-between;">
         <button id="close-settings" style="background: rgba(255,255,255,0.2); border: 1px solid ${colors.label}; color: ${colors.title}; padding: 3px 10px; border-radius: 4px; cursor: pointer; font-size: 10px; flex: 1; margin-right: 4px; transition: all 0.2s ease;">Back</button>
         <button id="show-about" style="background: rgba(255,255,255,0.2); border: 1px solid ${colors.label}; color: ${colors.title}; padding: 3px 10px; border-radius: 4px; cursor: pointer; font-size: 10px; flex: 1; margin-left: 4px; transition: all 0.2s ease;">About</button>
@@ -624,6 +786,10 @@ function showSettingsView() {
   const colorToggleContainer = displayDiv.querySelector('#color-toggle');
   const colorToggle = createColorModeToggle();
   colorToggleContainer.appendChild(colorToggle);
+  
+  const uiScaleContainer = displayDiv.querySelector('#ui-scale-slider');
+  const uiScaleSlider = createUIScaleSlider();
+  uiScaleContainer.appendChild(uiScaleSlider);
 }
 
 function showAboutView() {
@@ -635,7 +801,7 @@ function showAboutView() {
       
       <div style="height: 235px; overflow-y: auto; padding-right: 8px; margin-bottom: 8px; scrollbar-width: thin;">
         <div style="color: ${colors.title}; font-size: 14px; font-weight: bold; margin-bottom: 8px;">Grok Usage Watch</div>
-        <div style="color: ${colors.label}; font-size: 12px; margin-bottom: 4px;"><strong>Version:</strong> 1.1.0</div>
+        <div style="color: ${colors.label}; font-size: 12px; margin-bottom: 4px;"><strong>Version:</strong> 1.2.0</div>
         <div style="color: ${colors.label}; font-size: 12px; margin-bottom: 12px;"><strong>Author:</strong> Joshua Wang</div>
         
         <div style="color: ${colors.value}; font-size: 12px; line-height: 1.5; margin-bottom: 12px;">

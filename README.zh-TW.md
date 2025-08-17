@@ -8,20 +8,19 @@
 
 ## 📌 功能介紹
 
-**Grok Usage Watch** 是一款輕量級瀏覽器擴充功能，可即時顯示 Grok 的使用量，以及每次請求的「effort 等級」。  
+**Grok Usage Watch** 是一款輕量級的瀏覽器擴充功能，能在 Grok.com 網站上即時顯示你的剩餘使用資源。 
 
-每次對話的「effort 等級」會由 Grok 系統根據 xAI 的內部邏輯自動判斷，代表該請求的任務難度與耗用的 Token 強度，讓你更清楚掌握資源使用狀況。
+支援 Grok 3、Grok 4 和 Grok 4 Heavy，透過簡潔、可拖曳的懸浮視窗，讓你隨時掌握使用狀況。
 
 ---
 
 ## ✨ 功能特色
 
-* ✅ 即時查看 Grok 的使用量
-* 🎨 美觀流暢的浮動介面，可自由拖曳調整位置
-* ⚡ 每 5 秒自動更新一次
-* 🧠 安裝後即可於 [grok.com](https://grok.com) 立即使用，無需額外設定
-* 🌍 相容於 **Chrome、Edge、Brave** 等主流 Chromium 瀏覽器
-* 🆓 免費、無廣告
+* 即時用量追蹤
+* 支援 Grok 免費與付費用戶
+* 可拖曳的懸浮式介面
+* 用量耗盡時會顯示補充倒數計時
+* 支援深色／淺色模式切換
 
 ---
 
@@ -29,13 +28,13 @@
 
 ### 🔐 SuperGrok 用戶 UI
 
-![Grok Usage Watch screenshot](screenshot.png)
+![Grok Usage Watch screenshot](assets/screenshot.png)
 
 ---
 
 ### 🆓 Grok 用戶 UI
 
-![Grok Usage Watch screenshot2](screenshot2.png)
+![Grok Usage Watch screenshot2](assets/screenshot2.png)
 
 ---
 
