@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Grok Usage Watch – ตัวติดตามขีดจำกัดการใช้งาน"
+  },
+  "extensionDescription": {
+    "message": "ติดตามการใช้งาน Grok แบบเรียลไทม์ รองรับ Grok 3 และ Grok 4"
+  },
+  "actionTitle": {
+    "message": "เปิด Grok.com"
+  }
+}

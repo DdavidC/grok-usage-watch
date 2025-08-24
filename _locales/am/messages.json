@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Grok Usage Watch – የአጠቃቀም መከታተያ"
+  },
+  "extensionDescription": {
+    "message": "የGrok አጠቃቀምን በቀጥታ ይከታተሉ። Grok 3 እና Grok 4ን ይደግፋል።"
+  },
+  "actionTitle": {
+    "message": "Grok.com ክፈት"
+  }
+}

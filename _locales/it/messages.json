@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Grok Usage Watch – Tracker Limite di Utilizzo"
+  },
+  "extensionDescription": {
+    "message": "Monitora l'utilizzo di Grok in tempo reale. Supporta Grok 3 e Grok 4."
+  },
+  "actionTitle": {
+    "message": "Apri Grok.com"
+  }
+}

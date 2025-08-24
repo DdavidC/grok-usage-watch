@@ -2,6 +2,16 @@
 
 ---
 
+## v1.3.0 - 2025-08-18
+
+* Added Reset Position button in Settings for easy panel repositioning.
+* Improved Settings layout consistency and hover effects.
+* Enhanced UI Scale slider interaction and visual feedback.
+* Minor UI/UX refinements and bug fixes.
+* Now fully localized in all languages officially supported by the Chrome Web Store.
+
+---
+
 ## v1.2.0 - 2025-08-17
 
 * Added UI scale options: users can now resize the interface (80%, 90%, 100%, 110%, 120%) to suit their preferences.

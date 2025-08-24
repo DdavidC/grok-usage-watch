@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Grok Usage Watch – Sledování Rychlostních Limitů"
+  },
+  "extensionDescription": {
+    "message": "Sledujte využití Grok v reálném čase. Podporuje Grok 3 a Grok 4."
+  },
+  "actionTitle": {
+    "message": "Otevřít Grok.com"
+  }
+}

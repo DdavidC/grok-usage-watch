@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Grok Usage Watch – Hastighetsbegrensning Sporer"
+  },
+  "extensionDescription": {
+    "message": "Spor Grok-bruk i sanntid. Støtter Grok 3 og Grok 4."
+  },
+  "actionTitle": {
+    "message": "Åpne Grok.com"
+  }
+}
