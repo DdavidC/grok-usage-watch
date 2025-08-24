@@ -64,7 +64,7 @@ function loadPosition() {
       return JSON.parse(saved);
     }
   } catch (e) {
-    console.log('Failed to load position:', e);
+
   }
   return null;
 }
@@ -73,7 +73,7 @@ function savePosition(top, left) {
   try {
     localStorage.setItem('grokUsageWatchPosition', JSON.stringify({ top, left }));
   } catch (e) {
-    console.log('Failed to save position:', e);
+
   }
 }
 
@@ -85,7 +85,7 @@ function loadSettings() {
       isCollapsed = settings.isCollapsed;
     }
   } catch (e) {
-    console.log('Failed to load settings:', e);
+
   }
 }
 
@@ -93,7 +93,7 @@ function saveSettings() {
   try {
     localStorage.setItem('grokUsageWatchSettings', JSON.stringify(settings));
   } catch (e) {
-    console.log('Failed to save settings:', e);
+
   }
 }
 
@@ -457,7 +457,6 @@ function createUIScaleSlider() {
     width: 150px;
     height: 32px;
     position: relative;
-    background: ${settings.colorMode === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'};
     border-radius: 6px;
     padding: 4px 12px;
   `;
@@ -471,6 +470,7 @@ function createUIScaleSlider() {
     height: 2px;
     background: ${settings.colorMode === 'dark' ? '#555' : '#ccc'};
     border-radius: 1px;
+    z-index: 1;
   `;
   
   const scaleValues = [0.8, 0.9, 1.0, 1.1, 1.2];
@@ -486,7 +486,7 @@ function createUIScaleSlider() {
       position: absolute;
       top: 0;
       left: ${tickPosition}px;
-      width: 30px;
+      width: 40px;
       height: 32px;
       transform: translateX(-50%);
       cursor: pointer;
@@ -494,18 +494,19 @@ function createUIScaleSlider() {
       align-items: center;
       justify-content: center;
       flex-direction: column;
+      z-index: 2;
     `;
     
     const isActive = Math.abs(settings.uiScale - scale) < 0.01;
     
     const tick = document.createElement('div');
     tick.style.cssText = `
-      width: 2px;
+      width: 4px;
       height: ${isActive ? '14px' : '10px'};
       background: ${isActive ? '#27ae60' : (settings.colorMode === 'dark' ? '#777' : '#999')};
       transition: all 0.2s ease;
       pointer-events: none;
-      border-radius: 1px;
+      border-radius: 2px;
       margin-bottom: 2px;
     `;
     
@@ -530,10 +531,10 @@ function createUIScaleSlider() {
     
     tickContainer.onmouseenter = () => {
       if (!isActive) {
-        tick.style.background = '#3498db';
+        tick.style.background = settings.colorMode === 'dark' ? '#bdc3c7' : '#5d6d7e';
         tick.style.height = '12px';
-        tick.style.width = '3px';
-        label.style.color = '#3498db';
+        tick.style.width = '5px';
+        label.style.color = settings.colorMode === 'dark' ? '#bdc3c7' : '#5d6d7e';
         label.style.fontWeight = 'bold';
       }
     };
@@ -542,7 +543,7 @@ function createUIScaleSlider() {
       if (!isActive) {
         tick.style.background = settings.colorMode === 'dark' ? '#777' : '#999';
         tick.style.height = '10px';
-        tick.style.width = '2px';
+        tick.style.width = '4px';
         label.style.color = colors.label;
         label.style.fontWeight = 'normal';
       }
@@ -612,9 +613,9 @@ function createDisplay() {
       displayDiv.style.right = "auto";
     } else {
       const elementWidth = 200;
-      const padding = 20;
-      const defaultLeft = Math.max(0, window.innerWidth - elementWidth - padding);
-      const defaultTop = Math.max(0, padding);
+      const defaultTop = 150;
+      const defaultRight = 20;
+      const defaultLeft = Math.max(0, window.innerWidth - elementWidth - defaultRight);
       
       displayDiv.style.top = defaultTop + "px";
       displayDiv.style.left = defaultLeft + "px";
@@ -718,7 +719,7 @@ function showSettingsView() {
   displayDiv.innerHTML = `
     <strong style="color: ${colors.title}; font-size: 16px; display: block; text-align: center;">Settings</strong>
     <div style="margin-top: 8px;">
-      <div style="background: rgba(255,255,255,0.1); padding: 6px; border-radius: 4px; margin-bottom: 6px;">
+      <div style="padding: 6px; margin-bottom: 6px;">
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <div style="flex: 1;">
             <div style="font-size: 13px; font-weight: bold; color: ${colors.title};">Hide Grok 4 Heavy</div>
@@ -727,7 +728,7 @@ function showSettingsView() {
         </div>
       </div>
       
-      <div style="background: rgba(255,255,255,0.1); padding: 6px; border-radius: 4px; margin-bottom: 6px;">
+      <div style="padding: 6px; margin-bottom: 6px;">
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <div style="flex: 1;">
             <div style="font-size: 13px; font-weight: bold; color: ${colors.title};">Color Mode</div>
@@ -736,7 +737,16 @@ function showSettingsView() {
         </div>
       </div>
       
-      <div style="background: rgba(255,255,255,0.1); padding: 6px; border-radius: 4px; margin-bottom: 6px;">
+      <div style="padding: 6px; margin-bottom: 6px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="flex: 1;">
+            <div style="font-size: 13px; font-weight: bold; color: ${colors.title};">Reset Position</div>
+          </div>
+          <button id="reset-position-btn" class="no-drag" style="background: ${settings.colorMode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.2)'}; border: 1px solid ${colors.label}; color: ${colors.title}; padding: 4px; border-radius: 4px; cursor: pointer; font-size: 12px; transition: all 0.2s ease; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;" title="Restore to default position">↺</button>
+        </div>
+      </div>
+      
+      <div style="padding: 6px; margin-bottom: 6px;">
         <div style="display: flex; flex-direction: column;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
             <div style="flex: 1;">
@@ -748,8 +758,8 @@ function showSettingsView() {
       </div>
       
       <div class="no-drag" style="text-align: center; margin-top: 8px; display: flex; justify-content: space-between;">
-        <button id="close-settings" style="background: rgba(255,255,255,0.2); border: 1px solid ${colors.label}; color: ${colors.title}; padding: 3px 10px; border-radius: 4px; cursor: pointer; font-size: 10px; flex: 1; margin-right: 4px; transition: all 0.2s ease;">Back</button>
-        <button id="show-about" style="background: rgba(255,255,255,0.2); border: 1px solid ${colors.label}; color: ${colors.title}; padding: 3px 10px; border-radius: 4px; cursor: pointer; font-size: 10px; flex: 1; margin-left: 4px; transition: all 0.2s ease;">About</button>
+        <button id="close-settings" style="background: ${settings.colorMode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.2)'}; border: 1px solid ${colors.label}; color: ${colors.title}; padding: 3px 10px; border-radius: 4px; cursor: pointer; font-size: 10px; flex: 1; margin-right: 4px; transition: all 0.2s ease;">Back</button>
+        <button id="show-about" style="background: ${settings.colorMode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.2)'}; border: 1px solid ${colors.label}; color: ${colors.title}; padding: 3px 10px; border-radius: 4px; cursor: pointer; font-size: 10px; flex: 1; margin-left: 4px; transition: all 0.2s ease;">About</button>
       </div>
     </div>
   `;
@@ -757,22 +767,22 @@ function showSettingsView() {
   const closeBtn = displayDiv.querySelector('#close-settings');
   closeBtn.onclick = showMain;
   closeBtn.onmouseenter = () => {
-    closeBtn.style.background = 'rgba(255,255,255,0.3)';
-    closeBtn.style.borderColor = settings.colorMode === 'dark' ? '#666' : '#888';
+    closeBtn.style.background = settings.colorMode === 'dark' ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.6)';
+    closeBtn.style.borderColor = settings.colorMode === 'dark' ? '#888' : '#888';
   };
   closeBtn.onmouseleave = () => {
-    closeBtn.style.background = 'rgba(255,255,255,0.2)';
+    closeBtn.style.background = settings.colorMode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.2)';
     closeBtn.style.borderColor = getTextColors().label;
   };
   
   const aboutBtn = displayDiv.querySelector('#show-about');
   aboutBtn.onclick = showAbout;
   aboutBtn.onmouseenter = () => {
-    aboutBtn.style.background = 'rgba(255,255,255,0.3)';
-    aboutBtn.style.borderColor = settings.colorMode === 'dark' ? '#666' : '#888';
+    aboutBtn.style.background = settings.colorMode === 'dark' ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.6)';
+    aboutBtn.style.borderColor = settings.colorMode === 'dark' ? '#888' : '#888';
   };
   aboutBtn.onmouseleave = () => {
-    aboutBtn.style.background = 'rgba(255,255,255,0.2)';
+    aboutBtn.style.background = settings.colorMode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.2)';
     aboutBtn.style.borderColor = getTextColors().label;
   };
   
@@ -790,6 +800,36 @@ function showSettingsView() {
   const uiScaleContainer = displayDiv.querySelector('#ui-scale-slider');
   const uiScaleSlider = createUIScaleSlider();
   uiScaleContainer.appendChild(uiScaleSlider);
+  
+
+  const resetPositionBtn = displayDiv.querySelector('#reset-position-btn');
+  resetPositionBtn.onclick = () => {
+
+    const elementWidth = 200;
+    const defaultTop = 150;
+    const defaultRight = 20;
+    const defaultLeft = Math.max(0, window.innerWidth - elementWidth - defaultRight);
+    
+    displayDiv.style.top = defaultTop + 'px';
+    displayDiv.style.left = defaultLeft + 'px';
+    displayDiv.style.right = 'auto';
+    
+
+    savePosition(defaultTop, defaultLeft);
+    
+
+    showMain();
+  };
+  
+  resetPositionBtn.onmouseenter = () => {
+    resetPositionBtn.style.background = settings.colorMode === 'dark' ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.6)';
+    resetPositionBtn.style.borderColor = settings.colorMode === 'dark' ? '#888' : '#888';
+  };
+  
+  resetPositionBtn.onmouseleave = () => {
+    resetPositionBtn.style.background = settings.colorMode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.2)';
+    resetPositionBtn.style.borderColor = getTextColors().label;
+  };
 }
 
 function showAboutView() {
@@ -801,7 +841,7 @@ function showAboutView() {
       
       <div style="height: 235px; overflow-y: auto; padding-right: 8px; margin-bottom: 8px; scrollbar-width: thin;">
         <div style="color: ${colors.title}; font-size: 14px; font-weight: bold; margin-bottom: 8px;">Grok Usage Watch</div>
-        <div style="color: ${colors.label}; font-size: 12px; margin-bottom: 4px;"><strong>Version:</strong> 1.2.0</div>
+        <div style="color: ${colors.label}; font-size: 12px; margin-bottom: 4px;"><strong>Version:</strong> 1.3.0</div>
         <div style="color: ${colors.label}; font-size: 12px; margin-bottom: 12px;"><strong>Author:</strong> Joshua Wang</div>
         
         <div style="color: ${colors.value}; font-size: 12px; line-height: 1.5; margin-bottom: 12px;">
@@ -817,7 +857,7 @@ function showAboutView() {
       </div>
       
       <div class="no-drag" style="text-align: center; position: absolute; bottom: 0; left: 0; right: 0;">
-        <button id="close-about" style="background: rgba(255,255,255,0.2); border: 1px solid ${colors.label}; color: ${colors.title}; padding: 3px 10px; border-radius: 4px; cursor: pointer; font-size: 10px; width: 100%; transition: all 0.2s ease;">Back</button>
+        <button id="close-about" style="background: ${settings.colorMode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.2)'}; border: 1px solid ${colors.label}; color: ${colors.title}; padding: 3px 10px; border-radius: 4px; cursor: pointer; font-size: 10px; width: 100%; transition: all 0.2s ease;">Back</button>
       </div>
     </div>
   `;
@@ -825,11 +865,11 @@ function showAboutView() {
   const closeBtn = displayDiv.querySelector('#close-about');
   closeBtn.onclick = showMain;
   closeBtn.onmouseenter = () => {
-    closeBtn.style.background = 'rgba(255,255,255,0.3)';
-    closeBtn.style.borderColor = settings.colorMode === 'dark' ? '#666' : '#888';
+    closeBtn.style.background = settings.colorMode === 'dark' ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.6)';
+    closeBtn.style.borderColor = settings.colorMode === 'dark' ? '#888' : '#888';
   };
   closeBtn.onmouseleave = () => {
-    closeBtn.style.background = 'rgba(255,255,255,0.2)';
+    closeBtn.style.background = settings.colorMode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.2)';
     closeBtn.style.borderColor = getTextColors().label;
   };
 }
