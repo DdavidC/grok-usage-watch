@@ -3,7 +3,7 @@
     "message": "Grok Usage Watch – Pelacak Batas Penggunaan"
   },
   "extensionDescription": {
-    "message": "Lacak tokens Grok dan tingkat Effort secara real-time. Mendukung Grok 3 dan Grok 4."
+    "message": "Lacak penggunaan Grok secara real-time. Mendukung Grok 3 dan Grok 4."
   },
   "actionTitle": {
     "message": "Buka Grok.com"

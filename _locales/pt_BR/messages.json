@@ -3,7 +3,7 @@
     "message": "Grok Usage Watch – Controle de Uso"
   },
   "extensionDescription": {
-    "message": "Acompanhe tokens do Grok e nível de Effort em tempo real. Suporta Grok 3 e Grok 4."
+    "message": "Acompanhe o uso do Grok em tempo real. Suporta Grok 3 e Grok 4."
   },
   "actionTitle": {
     "message": "Abrir Grok.com"

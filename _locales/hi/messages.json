@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Grok Usage Watch – दर सीमा ट्रैकर"
+  },
+  "extensionDescription": {
+    "message": "Grok उपयोग को वास्तविक समय में ट्रैक करें। Grok 3 और Grok 4 का समर्थन करता है।"
+  },
+  "actionTitle": {
+    "message": "Grok.com खोलें"
+  }
+}

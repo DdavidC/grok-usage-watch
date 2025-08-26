@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Grok Usage Watch – Проследяване на Ограниченията"
+  },
+  "extensionDescription": {
+    "message": "Проследявайте използването на Grok в реално време. Поддържа Grok 3 и Grok 4."
+  },
+  "actionTitle": {
+    "message": "Отваряне на Grok.com"
+  }
+}

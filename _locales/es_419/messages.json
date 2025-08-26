@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Grok Usage Watch – Monitor de Uso en Tiempo Real"
+  },
+  "extensionDescription": {
+    "message": "Monitorea el uso de Grok en tiempo real. Compatible con Grok 3 y Grok 4."
+  },
+  "actionTitle": {
+    "message": "Abrir Grok.com"
+  }
+}
